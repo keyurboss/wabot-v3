@@ -1,0 +1,31 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test Intigrity Of Build
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --mode skip-build
+        
+      - name: Lint All Projects
+        run: yarn nx run-many --target=lint --all=true --parallel=true --maxParallel=2
+
+      - name: Build All Projects
+        run: yarn nx run-many --target=build --all=true --parallel=true --maxParallel=2
+
+      - name: Pack All Server
+        run: yarn nx run-many --target=pack --all=true --parallel=true --maxParallel=2

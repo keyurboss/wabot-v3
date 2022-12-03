@@ -1,0 +1,80 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Feature Building Test
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - 'feat/**'
+      - 'feature/**'
+      - bugfix/*
+      - hotfix/**
+      - release/**
+
+jobs:
+
+  lint-test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        target:
+          - lint
+          - test
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - run: git fetch --no-tags --prune --depth=1 origin main
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Yarn Affected ${TARGET}
+        run: yarn nx affected --target=${TARGET} --base=origin/main
+        env:
+          TARGET: ${{ matrix.target }}
+
+  build-pack:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        target:
+          - build
+          - pack
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - run: git fetch --no-tags --prune --depth=1 origin main
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Yarn Affected ${TARGET}
+        run: yarn nx affected --target=${TARGET} --base=origin/main 
+        env:
+          TARGET: ${{ matrix.target }}
