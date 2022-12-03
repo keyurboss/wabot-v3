@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.yarn/cache": true,
+    "**/.yarn/releases/*": true,
+    "**/.git": true,
+    "**/.idea": true,
+    "**/.vscode": true,
+    "**/dist": true
+  }
+}

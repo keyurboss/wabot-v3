@@ -4,7 +4,7 @@
 /dist
 /tmp
 /out-tsc
-
+/.yarn/install-state.gz
 # dependencies
 node_modules
 
