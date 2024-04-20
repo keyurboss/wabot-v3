@@ -4,16 +4,39 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@nestjs/schematics": "^10.0.1",
+    "@nestjs/testing": "^10.0.2",
     "@nx/angular": "^18.3.3",
+    "@nx/eslint": "18.3.3",
+    "@nx/eslint-plugin": "18.3.3",
     "@nx/js": "18.3.3",
     "@nx/nest": "^18.3.3",
+    "@nx/node": "18.3.3",
+    "@nx/web": "18.3.3",
+    "@nx/webpack": "18.3.3",
     "@nx/workspace": "18.3.3",
+    "@swc-node/register": "~1.8.0",
+    "@swc/core": "~1.3.85",
+    "@swc/helpers": "~0.5.2",
+    "@types/node": "~18.16.9",
+    "@typescript-eslint/eslint-plugin": "^7.3.0",
+    "@typescript-eslint/parser": "^7.3.0",
+    "eslint": "~8.57.0",
+    "eslint-config-prettier": "^9.0.0",
     "nx": "18.3.3",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "typescript": "~5.4.2",
+    "webpack-cli": "^5.1.4"
   },
   "packageManager": "yarn@4.1.1",
   "dependencies": {
+    "@nestjs/common": "^10.0.2",
+    "@nestjs/core": "^10.0.2",
+    "@nestjs/platform-express": "^10.0.2",
     "electron": "^30.0.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.0",
+    "tslib": "^2.3.0",
     "xlsx": "^0.18.5"
   }
 }

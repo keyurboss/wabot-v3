@@ -1,0 +1,24 @@
+{
+  "name": "wabot-server",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/servers/wabot-server/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "wabot-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "wabot-server:build:development"
+        },
+        "production": {
+          "buildTarget": "wabot-server:build:production"
+        }
+      }
+    }
+  }
+}
