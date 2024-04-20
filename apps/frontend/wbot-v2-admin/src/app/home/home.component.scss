@@ -1,0 +1,51 @@
+table {
+  border-spacing: 0;
+  tbody {
+    .sele {
+      background-color: rgb(221, 216, 216);
+    }
+    tr {
+      td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 14px;
+    button {
+      height: 70%;
+      font-size: 12px;
+    }
+    h4 {
+      font-size: 16px !important;
+    }
+    h1 {
+      font-size: 30px !important;
+    }
+  }
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  * {
+    font-size: 10px;
+    .sclass {
+      height: 50%;
+    }
+    button {
+      height: 50%;
+      font-size: 6px;
+    }
+    h4 {
+      font-size: 12px !important;
+    }
+    h1 {
+      font-size: 30px !important;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+:host {
+  height: var(--header-height);
+}
+#header {
+  height: var(--header-height);
+}
+.name {
+  font-size: 28px;
+  color: var(--rps-logo-primary);
+  font-weight: 500;
+  .n {
+    font-size: 14px;
+    font-weight: unset;
+    color: var(--rps-logo-second);
+  }
+  span {
+    color: var(--rps-logo-second);
+  }
+}
+.left {
+  padding-left: 10px;
+  .logo {
+    height: 84%;
+    width: auto;
+  }
+  .name_div {
+    padding-top: 3px;
+    padding-left: 3px;
+  }
+}

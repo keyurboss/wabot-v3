@@ -1,0 +1,10 @@
+.home-container {
+  --header-height: 0px;
+  height: calc(100% - var(--header-height));
+  width: 100%;
+  .router {
+    height: calc(100% - var(--header-height));
+    width: 100%;
+    position: relative;
+  }
+}

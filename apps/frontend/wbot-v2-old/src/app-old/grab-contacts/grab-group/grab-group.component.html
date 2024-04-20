@@ -1,0 +1,154 @@
+<div class="container flex center">
+  @if (groups | filter: searchString:'search'; as searchedContacts) {
+<div
+    class="partLeft flex center column height"
+   
+  >
+    <input
+      type="search"
+      class="searchBar width"
+      [(ngModel)]="searchString"
+      placeholder="Search.."
+    />
+
+    <div class="table-wrapper width">
+      <table class="flex column width height">
+        <thead class="flex align width">
+          <th class="chkb">
+            <div class="pretty p-icon p-round p-pulse">
+              <input
+                type="checkbox"
+                [ngModel]="allSelected"
+                (ngModelChange)="selectAllClick()"
+              />
+              <div class="state p-success">
+                <i class="icon mdi mdi-check"></i>
+                <label></label>
+              </div>
+            </div>
+          </th>
+          <th>Groups</th>
+        </thead>
+        <tbody>
+          @for (g of searchedContacts; track g) {
+<tr class="flex align width">
+            <td class="chkb">
+              <div class="pretty p-icon p-round p-pulse">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="g.selected"
+                  (click)="singleSelectClick()"
+                />
+                <div class="state p-success">
+                  <i class="icon mdi mdi-check"></i>
+                  <label></label>
+                </div>
+              </div>
+            </td>
+            <td
+              class="dataName"
+              matTooltip="{{ g.name }}"
+              matTooltipPosition="right"
+              matTooltipShowDelay="1000"
+            >
+              {{ g.name }}
+            </td>
+          </tr>
+}
+        </tbody>
+      </table>
+    </div>
+  </div>
+}
+  <div class="partMid flex center column height">
+    <button
+      mat-button
+      class="rps-mdl-button fetchBtn"
+      [disabled]="selectedGroupsCount === 0"
+      (click)="fetchGroups()"
+    >
+      Fetch Contacts
+    </button>
+  </div>
+  <div class="partRight flex column center height">
+    @if (isFetchGroups) {
+<div class="rd width">
+      <div class="labelDiv flex column justify width">
+        <span>Groups Selected: {{ selectedGroupsCount }}</span>
+        <span>Contacts Selected: {{ selectedContactsCount }}</span>
+      </div>
+      <div class="fileDiv flex center width">
+        <table class="rightTable flex column width height">
+          <tr class="width flex align">
+            <td class="td1">
+              <div class="pretty p-icon p-round p-pulse">
+                <input
+                  type="radio"
+                  name="icon_solid"
+                  [(ngModel)]="radioSlct"
+                  value="single"
+                  checked
+                />
+                <div class="state p-success">
+                  <i class="icon mdi mdi-check"></i>
+                  <label></label>
+                </div>
+              </div>
+            </td>
+            <td class="td2">
+              <label for="01">Single File</label>
+            </td>
+          </tr>
+          <tr class="width flex align">
+            <td class="td1">
+              <div class="pretty p-icon p-round p-pulse">
+                <input
+                  type="radio"
+                  name="icon_solid"
+                  [(ngModel)]="radioSlct"
+                  value="multiple"
+                />
+                <div class="state p-success">
+                  <i class="icon mdi mdi-check"></i>
+                  <label></label>
+                </div>
+              </div>
+            </td>
+            <td class="td2">
+              <label for="02">Multiple File</label>
+            </td>
+          </tr>
+          <tr class="width flex align">
+            <td class="td1">
+              <div class="pretty p-icon p-round p-pulse">
+                <input
+                  type="radio"
+                  name="icon_solid"
+                  [(ngModel)]="radioSlct"
+                  value="table"
+                />
+                <div class="state p-success">
+                  <i class="icon mdi mdi-check"></i>
+                  <label></label>
+                </div>
+              </div>
+            </td>
+            <td class="td2">
+              <label for="03">Add to Table</label>
+            </td>
+          </tr>
+          <div class="btn flex center width">
+            <button
+              class="rps-mdl-button saveBtn"
+              [disabled]="selectedGroupsCount === 0"
+              (click)="saveContacts(radioSlct)"
+            >
+              Save
+            </button>
+          </div>
+        </table>
+      </div>
+    </div>
+}
+  </div>
+</div>

@@ -1,0 +1,101 @@
+{
+  "name": "wbot-v2-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/wbot-v2-admin/src",
+  "prefix": "wbot-v2-nx",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/wbot-v2-admin",
+        "index": "apps/wbot-v2-admin/src/index.html",
+        "main": "apps/wbot-v2-admin/src/main.ts",
+        "polyfills": "apps/wbot-v2-admin/src/polyfills.ts",
+        "tsConfig": "apps/wbot-v2-admin/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/wbot-v2-admin/src/favicon.ico",
+          "apps/wbot-v2-admin/src/assets"
+        ],
+        "styles": ["apps/wbot-v2-admin/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/wbot-v2-admin/src/environments/environment.ts",
+              "with": "apps/wbot-v2-admin/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "emulated": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/wbot-v2-admin/src/environments/environment.ts",
+              "with": "apps/wbot-v2-admin/src/environments/environment.emulated.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "wbot-v2-admin:build:production"
+        },
+        "emulated": {
+          "buildTarget": "wbot-v2-admin:build:emulated"
+        },
+        "development": {
+          "buildTarget": "wbot-v2-admin:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4252
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "wbot-v2-admin:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

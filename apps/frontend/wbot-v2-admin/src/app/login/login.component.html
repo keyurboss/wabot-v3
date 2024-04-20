@@ -1,0 +1,84 @@
+<div
+  class="main flex items-center justify-center w-screen h-screen overflow-hidden"
+>
+  <div class="middle w-[300px] h-[500px] rounded">
+    <div
+      class="w-full h-[15%] flex items-center justify-end flex-col text-center bg-white rounded-t-lg"
+    >
+      <h1 class="text-[30px] text-black font-bold">LOGIN</h1>
+    </div>
+    <div
+      class="w-full h-[15%] flex items-center justify-center flex-col bg-white"
+    >
+      <img
+        class="w-full h-[65%] mt-[5%]"
+        src="../../assets/svgs/whatsapp.svg"
+      />
+    </div>
+    <div class="w-full h-[60%] rounded-b-lg bg-white">
+      <form class="w-full h-full flex items-center justify-start flex-col">
+        <div
+          class="form-ele w-full h-[25%] flex items-center justify-center bg-white"
+        >
+          <div
+            class="forBorder w-9/12 h-2/3 border-b-2 border-gray-500 flex flex-row items-center justify-start"
+          >
+            <i class="icon-user91 mr-[2%] w-[10%]"></i>
+            <input
+              class="h-full w-[80%] pl-[2%]"
+              placeholder="Username"
+              name="uname"
+              type="text"
+              [(ngModel)]="username"
+              autocomplete="off"
+              required
+            />
+          </div>
+        </div>
+        <div
+          class="form-ele w-full h-[25%] flex items-center justify-center bg-white"
+        >
+          <div
+            class="forBorder w-9/12 h-2/3 border-b-2 border-gray-500 flex flex-row items-center justify-center"
+          >
+            <i class="icon-httpslock mr-[2%] w-[10%]"></i>
+            <input
+              class="h-full w-[80%] pl-[2%]"
+              placeholder="Password "
+              name="upswd"
+              [type]="this.viewPass ? 'text' : 'password'"
+              [(ngModel)]="password"
+              required
+            />
+            <!-- <i class="icon-remove_red_eye ml-[2%]"></i> -->
+            <div class="ic w-[10%] cursor-pointer" (click)="togglePassword()">
+              @if (viewPass === false) {
+<img
+                src="../../assets/icons8-eye-24.png"
+               
+              />
+}
+              @if (viewPass === true) {
+<img
+                src="../../assets/icons8-eye-24-slash.png"
+               
+              />
+}
+            </div>
+          </div>
+        </div>
+        <div
+          class="form-ele w-full h-[25%] flex flex-col items-center mt-[5%] justify-center bg-white"
+        >
+          <button
+            class="logbtn w-9/12 h-1/2 rounded-full text-white hover:!bg-none hover:bg-black active:!bg-none active:bg-black focus:!bg-none focus:bg-black"
+            (click)="loginClick()"
+          >
+            Login
+          </button>
+          <span class="h-[20%] text-red-600">{{ error }}</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

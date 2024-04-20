@@ -1,0 +1,244 @@
+.lower-section {
+  height: 94.46vh;
+}
+#contentbodys {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: $primary-color;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+  margin-left: 5px;
+}
+#header {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  // box-sizing: border-box;
+  // border: 1px solid;
+}
+.whapi-class {
+  height: calc(100% - var(--header-height));
+  margin-top: var(--header-height);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  opacity: 0;
+  z-index: -3;
+  &-ele {
+    opacity: 1;
+    z-index: 3 !important;
+  }
+}
+.header-button {
+  text-transform: unset;
+  line-height: 1.5;
+  min-width: 84px;
+  font-size: 12px;
+}
+.center-content {
+  text-align: center;
+}
+
+.mdl-layout__tab {
+  background-color: $back-color;
+  color: $back-color-con;
+  &:hover {
+    box-sizing: border-box;
+    background-color: $back-color-con;
+    color: $back-color !important;
+    border: $back-color 1px solid;
+  }
+  &.active {
+    border: $back-color 1px solid;
+    border-bottom: none;
+    box-sizing: border-box;
+    background-color: $back-color-con;
+    color: $back-color !important;
+  }
+}
+.section {
+  border-right: #000 1px solid;
+  float: right;
+  height: 100%;
+  z-index: -1;
+  &-left {
+    padding-right: calc(41.6666666667% - 30px);
+    position: absolute;
+  }
+}
+.middle-section {
+  border-right: #000 1px solid;
+  /* position: absolute; */
+  float: right;
+  /* padding-right: calc(41.6666666667% - 30px); */
+  height: 100%;
+  z-index: -1;
+}
+.match-parent {
+  width: inherit;
+  height: 610px;
+}
+.link {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.auto-width {
+  width: inherit;
+}
+.tab {
+  &-bar {
+    &-add {
+      background-color: $back-color;
+      color: $back-color-con;
+      text-align: center;
+      padding: 13px;
+      font-size: 22px;
+      &:hover {
+        background-color: $back-color-con;
+        color: $back-color !important;
+        box-sizing: border-box;
+        border: $back-color 1px solid;
+        padding: 12px;
+      }
+    }
+    &-font-mod {
+      // @extend .mdl-button;
+      font-size: 25px;
+      background-color: $back-color;
+      color: $back-color-con;
+      border: $back-color 1px solid;
+      float: right;
+      margin-left: 2px;
+      margin-right: 2px;
+      width: fit-content;
+      &:hover {
+        cursor: pointer;
+        background-color: $back-color-con;
+        color: $back-color;
+      }
+    }
+  }
+  &-textarea {
+    width: 100%;
+    border-right: $back-color 1px solid;
+    border-left: $back-color 1px solid;
+    border-bottom: $back-color 1px solid;
+    padding-top: 0px;
+    box-sizing: border-box;
+    height: 260px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &-edit-textarea {
+    font-family: Roboto;
+    font-size: 15px;
+    overflow-y: auto;
+    height: 220px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: 1px solid;
+    width: inherit;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &-icon-close {
+    float: right;
+    font-size: 22px;
+    color: $back-color;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.divider-top {
+  border-top: 1px solid lightgrey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+::-webkit-scrollbar-track {
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background-color: #fff;
+  background-image: -webkit-gradient(
+    linear,
+    40% 0%,
+    75% 84%,
+    from(#4d9c41),
+    to(#19911d),
+    color-stop(0.6, #54de5d)
+  );
+}
+.extra-header {
+  font-size: 23px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.modalservice {
+  // top: 0;
+  // z-index: 4;
+  // position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-color: #ffffffed;
+  width: inherit;
+
+  &-content {
+    display: flex;
+    width: inherit;
+    flex-direction: column;
+    justify-content: center;
+    // position: absolute;
+    height: inherit;
+    align-items: center;
+  }
+  &-spinner {
+    &-item {
+      width: 80px;
+      height: 80px;
+    }
+    &-container {
+      align-items: center;
+      display: flex;
+    }
+  }
+}
+.parentflex {
+  display: flex;
+  &-center {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+mat-label {
+  color: #000;
+}
+mat-hint {
+  color: #000 !important;
+}
+.mat-input-element {
+  &::placeholder {
+    color: grey;
+  }
+}

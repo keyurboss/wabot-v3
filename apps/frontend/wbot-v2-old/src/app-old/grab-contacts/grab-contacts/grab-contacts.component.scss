@@ -1,0 +1,33 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.headerTab {
+  height: 10%;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: stretch;
+  border-top: 1px solid black;
+}
+.headerBtn {
+  flex-grow: 1;
+  border: none;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.activeLink {
+  border-bottom: 3px solid rgb(12, 12, 102);
+}
+
+.backBtn {
+  font-size: 20px;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  margin: 8px;
+}

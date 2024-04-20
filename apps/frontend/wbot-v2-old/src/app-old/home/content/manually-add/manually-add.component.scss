@@ -1,0 +1,98 @@
+.container {
+  background-color: white;
+  height: 516px;
+  border-radius: 10px;
+  width: 700px;
+  &_content {
+    &_header {
+      margin-top: 1%;
+      height: 55px;
+      h1 {
+        margin: unset;
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+    &_middle {
+      border: 1px solid;
+      width: 97%;
+      height: 350px;
+      overflow: auto;
+      &_head {
+        height: 35px;
+        background-color: black;
+        color: #98ffbfd1;
+        h6 {
+          position: sticky;
+          margin: unset;
+          width: 20%;
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+      &_info {
+        padding: 1% 0;
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type='number'] {
+          -moz-appearance: textfield;
+        }
+        p {
+          width: 20%;
+          margin: 1% 0;
+        }
+        .input {
+          padding: 0 1.5%;
+          width: 15%;
+          margin: 0 2%;
+          font-size: 15px;
+          outline: none;
+        }
+        button {
+          width: 15%;
+          margin: 0 2%;
+          outline: none;
+          background-color: #82fdb1d1;
+          border: unset;
+          border-radius: 5px;
+          cursor: pointer;
+          &:hover {
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+              rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+          }
+          i {
+            font-size: 20px;
+          }
+          &:hover {
+            background-color: #98ffbfd1;
+          }
+        }
+        &:hover {
+          background-color: #cecece;
+        }
+      }
+    }
+    &_footer {
+      margin-top: 4%;
+      .btn {
+        margin: 0 5%;
+        width: 15%;
+        padding: 0.8%;
+        h6 {
+          margin: unset;
+          font-size: 15px;
+          font-weight: 500;
+        }
+        i {
+          font-size: 22px;
+          margin-right: 2%;
+        }
+      }
+    }
+  }
+}

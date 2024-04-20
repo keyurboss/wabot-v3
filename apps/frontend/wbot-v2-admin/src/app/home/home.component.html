@@ -1,0 +1,215 @@
+<div class="w-screen h-screen overflow-hidden flex flex-col">
+  <div class="w-full h-[15%] bg-[#01987a] flex items-center">
+    <div class="w-[10%] flex items-center justify-center">
+      <img class="w-[100px] h-[100px]" src="../../assets/svgs/whatsapp.svg" />
+    </div>
+    <div class="w-[90%] flex items-center justify-center">
+      <h1 class="text-[35px] font-extrabold">WABOT ADMIN PANEL</h1>
+    </div>
+  </div>
+  @if (homeServ.UserObserv | async | filter: searchString; as users) {
+<div
+    class="w-full h-[85%] flex items-center justify-center bg-white"
+   
+  >
+    <div
+      class="w-4/5 h-[90%] flex items-center justify-center flex-col shadow-[0_0_25px_4px_black]"
+    >
+      <div
+        class="tabTitle flex items-center justify-between w-full h-[10%] bg-white"
+      >
+        <div
+          class="sclass flex items-center justify-center w-[32%] h-3/4 bg-[rgb(221,216,216)] border rounded-[40px] ml-[1%] hover:border hover:border-solid hover:border-black active:border active:border-solid active:border-black"
+        >
+          <!-- <i class="icon-search"></i> -->
+          <img class="w-[8%] h-full" src="../../assets/search-sharp.svg" />
+          <input
+            type="search"
+            class="w-[84%] h-[90%] border-none ml-[1%] rounded-r-[40px] rounded-l-[10px] outline-none bg-[rgb(221,216,216)]"
+            [(ngModel)]="searchString"
+            placeholder="Search"
+          />
+        </div>
+        <div>
+          <h4 class="text-[20px] font-extrabold">
+            Total Users: {{ users.length }}
+          </h4>
+        </div>
+        <div class="w-[30%] h-3/4 mr-[1%] flex items-center justify-evenly">
+          <button
+            class="w-[20%] h-[90%] rps-btn whitespace-nowrap overflow-hidden text-ellipsis"
+            (click)="openInquiries()"
+            matTooltip="View Inquiries"
+          >
+            INQUIRIES
+          </button>
+          @if (homeServ.isAdmin === true) {
+<button
+            class="w-[20%] h-[90%] rps-btn whitespace-nowrap overflow-hidden text-ellipsis"
+            (click)="openDecryptFileComponent()"
+           
+            matTooltip="Decrypt File"
+          >
+            DECRYPT
+          </button>
+}
+          @if (homeServ.isAdmin === true) {
+<button
+            class="w-[20%] h-[90%] rps-btn whitespace-nowrap overflow-hidden text-ellipsis"
+            (click)="viewCids()"
+           
+            matTooltip="View CIDS"
+          >
+            CIDS
+          </button>
+}
+          <button
+            class="w-[20%] h-[90%] rps-btn"
+            [ngClass]="{
+              '!w-[20%] whitespace-nowrap overflow-hidden text-ellipsis':
+                homeServ.isAdmin === true
+            }"
+            (click)="deleteUser()"
+            matTooltip="Delete User"
+          >
+            DELETE
+          </button>
+          <button
+            class="w-[20%] h-[90%] rps-btn"
+            [ngClass]="{
+              '!w-[20%] whitespace-nowrap overflow-hidden text-ellipsis':
+                homeServ.isAdmin === true
+            }"
+            (click)="homeServ.logout()"
+            matTooltip="Logout"
+          >
+            LOGOUT
+          </button>
+        </div>
+      </div>
+      <div class="w-full h-[90%] bg-white overflow-y-scroll">
+        <table class="w-full h-full border-collapse box-border">
+          <thead
+            class="flex w-full items-center box-border h-[40px] bg-[#01987a] sticky z-10 top-0 border-b border-solid border-[#01987a]"
+          >
+            <th
+              class="flex-1 flex items-center justify-center"
+              style="width: 15%"
+            >
+              <div class="pretty p-icon p-round p-pulse">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="this.homeServ.allSelected"
+                  (click)="homeServ.selectAllClick(searchString)"
+                />
+                <div class="state p-success">
+                  <i
+                    class="icon mdi mdi-check customChk border-black bg-slate-700"
+                  ></i>
+                  <label></label>
+                </div>
+              </div>
+            </th>
+            @for (h of headers; track h) {
+<th
+              class="flex-1 flex items-center"
+              style="width: 25%"
+             
+              ngClass="{{
+                ['Type', 'Status'].includes(h)
+                  ? 'justify-center'
+                  : 'justift-start'
+              }}"
+            >
+              {{ h }}
+              <div class="w-[10%] ml-[5%]">
+                <div
+                  [ngStyle]="{
+                    transform:
+                      ad[h] === 'asc' ? 'rotate(270deg)' : 'rotate(90deg)'
+                  }"
+                  (click)="sortUsers(h)"
+                >
+                  <i class="icon-play_arrow1" style="color: white"></i>
+                </div>
+              </div>
+            </th>
+}
+            <th
+              class="flex-1 flex items-center justify-center"
+              style="width: 15%"
+            >
+              Edit
+            </th>
+          </thead>
+          <tbody class="flex flex-col w-full bg-[rgb(185, 181, 181)]">
+            @for (u of users | sortArray: colToSort:directionToSort; track u) {
+<tr
+              class="flex items-center h-[40px] border-b border-solid border-[#01987a] hover:!bg-[#01987a] active:!bg-[#01987a] focus:!bg-[#01987a]"
+             
+              [ngClass]="{ sele: u.selected === true }"
+            >
+              <td class="flex-1 text-center">
+                <div class="pretty p-icon p-round p-pulse">
+                  <input type="checkbox" [(ngModel)]="u.selected" />
+                  <div class="state p-success">
+                    <i class="icon mdi mdi-check border-black bg-slate-700"></i>
+                    <label></label>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="flex-1 text-left"
+                matTooltipShowDelay="1000"
+                matTooltip="{{ u.name }}"
+              >
+                {{ u.name }}
+              </td>
+              <td
+                class="flex-1 text-left"
+                matTooltipShowDelay="1000"
+                matTooltip="{{ u.number }}"
+              >
+                {{ u.number }}
+              </td>
+              <td class="flex-1 text-center">{{ u.type }}</td>
+              <td
+                class="flex-1 text-left"
+                matTooltipShowDelay="1000"
+                matTooltip="{{ u.created_at | date: 'dd/MM/yyyy' }}"
+              >
+                {{ u.created_at | date: 'dd/MM/yyyy' }}
+              </td>
+              <td
+                class="flex-1 text-left"
+                matTooltipShowDelay="1000"
+                matTooltip="{{ u.expire_at | date: 'dd/MM/yyyy' }}"
+              >
+                {{ u.expire_at | date: 'dd/MM/yyyy' }}
+              </td>
+              <td class="flex-1 text-center">{{ u.status }}</td>
+              <td class="flex-1 text-center">
+                <i
+                  class="icon-edit cursor-pointer hover:text-white focus:text-white active:text-white"
+                  [ngClass]="
+                    homeServ.isAdmin === false && u.is_trial !== true
+                      ? 'cursor-not-allowed'
+                      : ''
+                  "
+                  (click)="
+                    homeServ.isAdmin === false && u.is_trial !== true
+                      ? ''
+                      : editUser(u.uid)
+                  "
+                ></i>
+              </td>
+            </tr>
+}
+          </tbody>
+        </table>
+        <!-- </cdk-virtual-scroll-viewport> -->
+      </div>
+    </div>
+  </div>
+}
+</div>

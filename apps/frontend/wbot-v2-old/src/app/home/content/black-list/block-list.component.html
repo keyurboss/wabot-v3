@@ -1,0 +1,63 @@
+<div class="container flex center">
+  @if (numberArray | async; as n) {
+<div class="container_content">
+    <div class="container_content_header">
+      <h1>Block-List Numbers</h1>
+    </div>
+    <div class="container_content_middle width flex align">
+      <input
+        type="text"
+        placeholder="Enter Number"
+        [(ngModel)]="inputString"
+        maxlength="14"
+        minlength="10"
+        (keydown)="validationForNumber($event)"
+      />
+      <button class="btn-middle rps-mdl-button" (click)="add(inputString)">
+        <i class="icon-add1"></i>
+      </button>
+    </div>
+    @if (error) {
+<span style="color: red">{{ error }}</span>
+}
+    <div class="container_content_end width">
+      <div class="first flex column align">
+        <h1>Present Contacts:</h1>
+        <h2>{{ n.length }}</h2>
+      </div>
+      <div class="second flex column">
+        <div class="heading flex width">
+          <h1>Number</h1>
+          <h1>Remove</h1>
+        </div>
+        <div class="info">
+          <cdk-virtual-scroll-viewport
+            class="scroll virtual-scroll width height"
+            #harsh
+            itemSize="30"
+          >
+            <div
+              class="number width flex"
+              *cdkVirtualFor="let number of n | filter: inputString:'sgroup'"
+            >
+              <p class="flex justify">{{ number }}</p>
+              <div class="delete flex center" (click)="delete(number)">
+                <i class="icon-delete"></i>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>
+    <div class="container_content_footer flex justify width">
+      <button
+        class="btn-end rps-mdl-button tw-flex tw-items-center tw-flex-row"
+        mat-dialog-close
+      >
+        <i class="icon-close"></i>
+        <h6>Cancel</h6>
+      </button>
+    </div>
+  </div>
+}
+</div>

@@ -1,0 +1,136 @@
+$dBorder: white;
+$inBorder: #e0e0e0;
+
+.container {
+  width: 100vw;
+  height: 84vh;
+  flex-flow: row nowrap;
+  .partLeft {
+    width: 30%;
+    padding-left: 5%;
+
+    .searchBar {
+      outline: none;
+      border: none;
+      font-size: medium;
+      height: 53px;
+      padding: 5%;
+    }
+    .table-wrapper {
+      border: none;
+      margin-top: 2%;
+      height: 55vh;
+      box-sizing: border-box;
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        background-color: white;
+        box-sizing: border-box;
+        color: darkslategrey;
+
+        thead {
+          box-sizing: border-box;
+          height: 50px;
+          position: sticky;
+          top: 0px;
+          background-color: white;
+          border-bottom: 1px solid $inBorder;
+        }
+        tbody {
+          overflow-y: auto;
+          overflow-x: hidden;
+          tr {
+            height: 50px;
+            border-bottom: 1px solid $inBorder;
+            td {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .partMid {
+    width: 33%;
+    .fetchBtn {
+      width: 45%;
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #dde4e0d6;
+        color: black;
+      }
+    }
+  }
+  .partRight {
+    width: 32%;
+    align-content: center;
+    padding-right: 5%;
+    .rd {
+      margin: auto;
+      .labelDiv {
+        height: 51px;
+        border: none;
+        background-color: white;
+        span {
+          font-size: 1em;
+          font-weight: 500;
+          margin-left: 5%;
+        }
+      }
+      .fileDiv {
+        border: none;
+        font-size: 1.25em;
+        background-color: white;
+        margin-top: 2%;
+        .rightTable {
+          border-spacing: 0;
+          border-collapse: collapse;
+          background-color: white;
+          box-sizing: border-box;
+          color: darkslategrey;
+          .btn {
+            height: 72px;
+            margin-top: 2%;
+            .saveBtn {
+              border-radius: 5px;
+              font-size: 16px;
+              padding: 2%;
+              width: 25%;
+              &:disabled {
+                cursor: not-allowed;
+                background-color: #dde4e0d6;
+                color: black;
+              }
+            }
+          }
+          tr {
+            height: 50px;
+            border-bottom: 1px solid $inBorder;
+            .td1 {
+              margin-left: 20%;
+            }
+            .td2 {
+              margin-left: 10%;
+            }
+          }
+          td {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.chkb {
+  width: calc(20%);
+  margin: 15%;
+}
+.dataName {
+  display: inline-block;
+  width: calc(30%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

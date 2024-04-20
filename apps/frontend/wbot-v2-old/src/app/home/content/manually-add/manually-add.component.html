@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="container_content flex column align width height">
+    <div class="container_content_header flex center width">
+      <h1>Import Data Manually</h1>
+    </div>
+    <div class="container_content_middle">
+      <div class="container_content_middle_head flex width">
+        @for (header of header; track header) {
+<h6 class="flex center">{{ header }}</h6>
+}
+      </div>
+      @for (data of dtkey; track data; let i = $index) {
+<div>
+        <div class="container_content_middle_info flex width">
+          <p class="flex justify">{{ i + 1 }}</p>
+          <input
+            id="n"
+            type="text"
+            [(ngModel)]="data.number"
+            maxlength="14"
+            minlength="7"
+            class="number input"
+            (keydown)="validationForNumber($event)"
+          />
+          <input type="text" [(ngModel)]="data.var1" class="Var1 input" />
+          <input type="text" [(ngModel)]="data.var2" class="Var2 input" />
+          <input type="text" [(ngModel)]="data.var3" class="Var3 input" />
+
+          @if (dtkey.length === i + 1) {
+<button
+            type="submit"
+           
+            (click)="addData()"
+          >
+            <i class="icon-add1"></i>
+          </button>
+}
+          @if ((dtkey.length === i + 1) === false) {
+<button
+            type="button"
+           
+            (click)="dltData(i)"
+          >
+            <i class="icon-clearclose"></i>
+          </button>
+}
+        </div>
+      </div>
+}
+    </div>
+    <div class="container_content_footer width flex justify">
+      <button class="rps-mdl-button btn flex center" (click)="addDataToTable()">
+        <i class="icon-add1"></i>
+        <h6>Add Data</h6>
+      </button>
+      <button class="rps-mdl-button btn flex center" mat-dialog-close>
+        <i class="icon-clearclose"></i>
+        <h6>Cancel</h6>
+      </button>
+    </div>
+  </div>
+</div>

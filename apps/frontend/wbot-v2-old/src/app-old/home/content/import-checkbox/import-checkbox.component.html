@@ -1,0 +1,57 @@
+<div class="container flex center height">
+  <table class="rightTable flex column width height">
+    <h4>Please select items that you want to import from the file:</h4>
+    <h5>
+      Note: If you want to import messages, existing messages will be
+      overwritten.
+    </h5>
+
+    <tr class="width flex align">
+      <td class="td1">
+        <div class="pretty p-icon p-round p-pulse">
+          <input type="checkbox" name="icon_solid" [(ngModel)]="data.c" />
+          <div class="state p-success">
+            <i class="icon mdi mdi-check"></i>
+            <label></label>
+          </div>
+        </div>
+      </td>
+      <td class="td2">
+        <label for="01">Contacts</label>
+      </td>
+    </tr>
+    <tr class="width flex align">
+      <td class="td1">
+        <div class="pretty p-icon p-round p-pulse">
+          <input type="checkbox" name="icon_solid" [(ngModel)]="data.m" />
+          <div class="state p-success">
+            <i class="icon mdi mdi-check"></i>
+            <label></label>
+          </div>
+        </div>
+      </td>
+      <td class="td2">
+        <label for="02">Messages</label>
+      </td>
+    </tr>
+    <tr class="width flex align">
+      <td class="td1">
+        <div class="pretty p-icon p-round p-pulse">
+          <input type="checkbox" name="icon_solid" [(ngModel)]="data.e" />
+          <div class="state p-success">
+            <i class="icon mdi mdi-check"></i>
+            <label></label>
+          </div>
+        </div>
+      </td>
+      <td class="td2">
+        <label for="03">Extra Files</label>
+      </td>
+    </tr>
+    <div class="btn flex center width">
+      <button class="rps-mdl-button saveBtn" [mat-dialog-close]="data">
+        Import
+      </button>
+    </div>
+  </table>
+</div>

@@ -1,0 +1,69 @@
+input,
+select {
+  outline: none;
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 768px) {
+  * {
+    h2 {
+      font-size: 20px !important;
+    }
+    .frm {
+      justify-content: space-between;
+      .inputs {
+        height: 80%;
+        flex-direction: column-reverse;
+        label,
+        input,
+        select,
+        option {
+          font-size: 10px !important;
+        }
+      }
+      .buttons {
+        height: 20%;
+        justify-content: flex-end !important;
+        button {
+          height: 70%;
+          font-size: 10px;
+        }
+        .errors {
+          height: 20%;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  * {
+    h2 {
+      font-size: 16px !important;
+    }
+    .frm {
+      justify-content: space-between;
+      .inputs {
+        height: 80%;
+        flex-direction: column-reverse;
+        label,
+        input,
+        select,
+        option {
+          font-size: 8px !important;
+        }
+      }
+      .buttons {
+        height: 20%;
+        button {
+          height: 70%;
+          font-size: 5px;
+        }
+        .errors {
+          height: 20%;
+          font-size: 5px;
+        }
+      }
+    }
+  }
+}

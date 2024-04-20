@@ -1,0 +1,124 @@
+<div
+  class="tw-w-full tw-h-full flex tw-items-center tw-justify-center tw-flex-col"
+>
+  <div
+    class="tw-w-[70vw] tw-h-[80vh] tw-flex tw-flex-row tw-justify-evenly tw-items-center"
+  >
+    @for (s of contServ.subscrip; track s) {
+<mat-card
+      class="mycard tw-flex tw-flex-col tw-w-1/4 tw-h-[80%]"
+     
+    >
+      <mat-card-title-group
+        class="tw-h-[28%] tw-flex tw-flex-col !tw-justify-around tw-items-center"
+      >
+        <mat-card-title class="!tw-text-[17px]">{{ s.type }}</mat-card-title>
+        <div class="">
+          <h1 class="!tw-font-bold !tw-text-[32px]" style="margin: unset">
+            ₹{{ s.price }}
+          </h1>
+          <h6 class="tw-text-gray-400 tw-text-center">Per Year</h6>
+        </div>
+      </mat-card-title-group>
+      <div class="tw-h-[2%] flex tw-items-center tw-justify-center">
+        <mat-divider
+          class="!tw-w-[75%]"
+          style="position: inherit"
+        ></mat-divider>
+      </div>
+      <mat-card-content class="tw-h-[50%] tw-pt-[5%] tw-pl-[2%]">
+        @for (l of s.li; track l) {
+<div
+         
+          class="tw-w-full tw-flex tw-items-start tw-mb-[4%]"
+        >
+          <div
+            class="tw-w-[8%] !tw-h-full tw-flex tw-items-center tw-justify-start tw-mt-1"
+          >
+            <i class="icon-check_circle1 !tw-text-green-600"></i>
+          </div>
+          <span matLine class="!tw-text-[11px] tw-pl-[3%] tw-leading-[1.5]">
+            {{ l }}
+          </span>
+        </div>
+}
+      </mat-card-content>
+      <mat-card-actions class="!tw-flex tw-items-center tw-justify-center">
+        <button
+          mat-button
+          class="rps-mdl-button tw-w-[70%]"
+          (click)="selectPlan(s.type.toLowerCase())"
+          [disabled]="
+            isRouteParamUndefined === false &&
+            ((s.type.toLowerCase() === 'free' &&
+              routeParamUserType === 'free') ||
+              (routeParamUserType === 'plus' &&
+                s.type.toLowerCase() === 'free') ||
+              (routeParamUserType === 'premium' &&
+                s.type.toLowerCase() !== 'premium'))
+          "
+        >
+          @if (isRouteParamUndefined === true) {
+<span>SELECT</span>
+}
+          @if (
+              isRouteParamUndefined === false &&
+              s.type.toLowerCase() !== routeParamUserType
+            ) {
+<span
+           
+            >UPGRADE</span
+          >
+}
+          @if (
+              isRouteParamUndefined === false &&
+              s.type.toLowerCase() === routeParamUserType &&
+              is_user_trial === false
+            ) {
+<span
+           
+            >RENEW</span
+          >
+}
+          @if (
+              isRouteParamUndefined === false &&
+              s.type.toLowerCase() === routeParamUserType &&
+              is_user_trial === true
+            ) {
+<span
+           
+            >BUY</span
+          >
+}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+}
+  </div>
+  <!-- <h5 *ngIf="isRouteParamUndefined === false && routeParamUserType === 'plus'">
+    Note: If you want to upgrade to premium and you have used 'plus' package for
+    over 6 months, then you will get a discount.
+  </h5> -->
+  <div class="tw-w-full tw-flex tw-items-center tw-justify-center">
+    @if (is_expired === false && isRouteParamUndefined === false) {
+<button
+      mat-button
+      class="rps-mdl-button tw-w-[10%]"
+     
+      (click)="backButtonClick()"
+    >
+      BACK
+    </button>
+}
+    <!-- <button
+      mat-button
+      class="rps-mdl-button tw-left-[1%] tw-w-[10%]"
+      *ngIf="isRouteParamUndefined === false"
+      [routerLink]="'/inquiry'"
+      routerLinkActive="activeLink"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      INQUIRY
+    </button> -->
+  </div>
+</div>

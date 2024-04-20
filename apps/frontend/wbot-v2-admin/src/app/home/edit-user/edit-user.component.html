@@ -1,0 +1,104 @@
+<div
+  class="w-full h-full border-[3px] border-solid box-border flex items-center justify-center flex-col"
+>
+  <div class="w-full h-[15%] flex items-center justify-center">
+    <h2 class="text-[25px]"><b>EDIT USER</b></h2>
+  </div>
+  <form
+    class="frm w-full h-[85%] flex items-center justify-center box-border flex-col"
+  >
+    <div class="inputs w-full h-[70%] flex items-center justify-evenly">
+      <div class="w-[45%] h-full flex items-center justify-center flex-col">
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Number:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="number"
+            placeholder="Enter Number"
+            [(ngModel)]="user.number"
+            name="unum"
+            disabled
+          />
+        </div>
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Ref No:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="text"
+            placeholder="Enter Reference No."
+            [(ngModel)]="user.ref_no"
+            name="uref"
+            disabled
+          />
+        </div>
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Type:</label>
+          <select
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black"
+            [(ngModel)]="user.type"
+            name="utype"
+          >
+            <option value="free">Free</option>
+            <option value="plus">Plus</option>
+            <option value="premium">Premium</option>
+          </select>
+        </div>
+      </div>
+      <div class="w-[45%] h-full flex items-center justify-center flex-col">
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Name:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="text"
+            placeholder="Enter Name"
+            [(ngModel)]="user.name"
+            name="uname"
+            autocomplete="off"
+            disabled
+          />
+        </div>
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Created On:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="date"
+            placeholder="Enter Date"
+            [(ngModel)]="createdDate"
+            name="ucreate"
+            disabled
+          />
+        </div>
+        <div class="w-full flex justify-between flex-col mb-[5%]">
+          <label class="text-[13px] font-bold">Expires On:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black"
+            type="date"
+            placeholder="Enter Date"
+            [(ngModel)]="expiredDate"
+            name="uexpire"
+            [min]="createdDate | date: 'YYYY-MM-dd'"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="buttons w-full h-[30%] flex flex-col">
+      <div class="w-full h-1/2 flex items-center justify-evenly">
+        <button
+          class="w-1/5 h-4/5 bg-black text-[#98ffbfd1] rps-btn"
+          (click)="submitUser()"
+        >
+          UPDATE
+        </button>
+        <button
+          class="w-1/5 h-4/5 bg-black text-[#98ffbfd1] rps-btn"
+          (click)="closeDialog()"
+        >
+          CANCEL
+        </button>
+      </div>
+      <div class="errors w-full h-1/2 flex items-center justify-evenly">
+        <p class="text-[rgb(255,0,0)]">{{ error }}</p>
+      </div>
+    </div>
+  </form>
+</div>

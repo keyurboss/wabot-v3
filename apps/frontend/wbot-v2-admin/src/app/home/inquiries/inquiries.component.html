@@ -1,0 +1,101 @@
+@if (
+    homeServ.inquiriesObserv | async | filter_inquiry: searchString; as dataP
+  ) {
+<div
+  class="w-full h-full border-[3px] border-solid box-border flex items-center justify-center flex-col"
+ 
+>
+  <div class="w-full h-[10%] flex items-center justify-center">
+    <h2 class="text-[25px]"><b>INQUIRIES</b></h2>
+  </div>
+  <div class="w-full h-[5%] flex items-center justify-between pl-[1%] mb-[1%]">
+    <div
+      class="flex items-center justify-center w-[32%] h-full bg-[#ddd8d8] border rounded-[40px] ml-[1%] hover:border hover:border-solid hover:border-black active:border active:border-solid active:border-black"
+    >
+      <!-- <i class="icon-search"></i> -->
+      <img class="w-[8%] h-full" src="../../../assets/search-sharp.svg" />
+      <input
+        type="search"
+        class="w-[84%] h-[90%] border-none ml-[1%] rounded-r-[40px] rounded-l-[10px] outline-none bg-[#ddd8d8]"
+        [(ngModel)]="searchString"
+        placeholder="Search"
+      />
+    </div>
+    <div class="w-[20%] h-full text-center">
+      <p>
+        <b>Total Inquiries: {{ homeServ.inquiriesObserv.value.length }}</b>
+      </p>
+    </div>
+  </div>
+  <div class="w-full h-[60%] overflow-y-scroll">
+    <table class="w-full h-full border-collapse box-border">
+      <thead
+        class="flex w-full table_grid grid grid_template items-center box-border h-[35px] bg-[#01987a] sticky z-10 top-0 border-b border-solid border-[#01987a]"
+      >
+        <th class="text-center">
+          <i class="icon-visibility"></i>
+        </th>
+        <th class="text-center">UID</th>
+        <th class="text-center">InqID</th>
+        <th class="text-center">Type</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Subject</th>
+        <th class="text-center">Description</th>
+        <th class="text-center">Reply</th>
+        <th class="text-center">
+          <i class="icon-delete1 text-red-600 text-[16px]"></i>
+        </th>
+      </thead>
+      <tbody class="flex flex-col bg-[rgb(185, 181, 181)]">
+        @for (d of dataP; track d) {
+<tr
+          class="tabRow table_grid grid grid_template flex items-center h-[35px] border-b border-solid border-[#01987a] hover:bg-[#01987a] active:bg-[#01987a] focus:bg-[#01987a]"
+         
+        >
+          <td class="text-center" (click)="viewInquiry(d.inq_id, d.uid)">
+            <i class="icon-visibility cursor-pointer"></i>
+          </td>
+          <td class="flex justify-center" matTooltip="{{ d.uid }}">
+            <p class="w-[91%] whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.uid }}
+            </p>
+          </td>
+          <td class="flex justify-center" matTooltip="{{ d.inq_id }}">
+            <p
+              class="w-[91%] whitespace-nowrap overflow-hidden text-ellipsis text-center"
+            >
+              {{ d.inq_id }}
+            </p>
+          </td>
+          <td class="text-center">{{ d.inquiry_type }}</td>
+          <td class="text-center">
+            {{ d.status }}
+          </td>
+          <td class="text-center flex justify-start pr-[2%]">
+            <p class="whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.subject }}
+            </p>
+          </td>
+          <td class="text-center flex justify-between pr-[3%]">
+            <p class="whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.description }}
+            </p>
+          </td>
+          <td class="text-center flex justify-between pr-[3%]">
+            <p class="whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.reply_from_admin }}
+            </p>
+          </td>
+          <td class="text-center" (click)="deleteInquiry(d.inq_id)">
+            <i class="icon-delete1 text-red-600 text-[16px] cursor-pointer"></i>
+          </td>
+        </tr>
+}
+      </tbody>
+    </table>
+  </div>
+  <div class="w-full h-[15%] flex items-center justify-evenly">
+    <button class="w-1/6 h-2/5 rps-btn" (click)="closeDialog()">CLOSE</button>
+  </div>
+</div>
+}

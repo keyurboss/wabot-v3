@@ -1,0 +1,99 @@
+<div
+  class="w-full h-full border-[3px] border-solid box-border flex items-center justify-center flex-col"
+>
+  <div class="w-full h-[15%] flex items-center justify-center mb-[1%]">
+    <h2 class="text-[25px]">
+      <b>USER INQUIRY: {{ username }}</b>
+    </h2>
+  </div>
+  <form
+    class="frm w-full h-[85%] flex items-center justify-center box-border flex-col px-[3%]"
+  >
+    <div
+      class="inputs w-full h-[70%] flex items-center justify-evenly flex-col"
+    >
+      <div class="w-full flex items-center justify-between">
+        <div class="w-[30%] flex flex-col">
+          <label class="text-[13px] font-bold">Inq_ID:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="text"
+            [(ngModel)]="data.view_inq_id"
+            name="idate"
+            disabled
+          />
+        </div>
+        <div class="w-[30%] flex flex-col">
+          <label class="text-[13px] font-bold">Inquiry Type:</label>
+          <input
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+            type="text"
+            [(ngModel)]="inquiryDetails.inquiry_type"
+            name="itype"
+            disabled
+          />
+        </div>
+        <div class="w-[30%] flex flex-col">
+          <label class="text-[13px] font-bold">Status:</label>
+          <select
+            class="border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[15px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black"
+            [(ngModel)]="newStatus"
+            name="istatus"
+            [disabled]="inquiryDetails.status !== 'PENDING'"
+          >
+            <option value="PENDING">PENDING</option>
+            <option value="RESOLVED">RESOLVED</option>
+            <option value="REJECTED">REJECTED</option>
+          </select>
+        </div>
+      </div>
+      <div class="w-full">
+        <label class="text-[13px] font-bold">Subject:</label>
+        <input
+          class="w-full border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[10px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+          type="text"
+          [(ngModel)]="inquiryDetails.subject"
+          name="isubject"
+          disabled
+        />
+      </div>
+      <div class="w-full">
+        <label class="text-[13px] font-bold">Description:</label>
+        <textarea
+          class="w-full border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[10px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+          [(ngModel)]="inquiryDetails.description"
+          name="idescription"
+          disabled
+        ></textarea>
+      </div>
+      <div class="w-full">
+        <label class="text-[13px] font-bold">Reply:</label>
+        <textarea
+          class="w-full border border-solid border-[rgb(128,128,128)] rounded-[3px] p-[2%] pl-[3%] text-[10px] box-border hover:outline-1 hover:outline hover:outline-black hover:border-black active:outline-1 active:outline active:outline-black active:border-black focus:outline-1 focus:outline focus:outline-black focus:border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+          [(ngModel)]="newReply"
+          [disabled]="inquiryDetails.status !== 'PENDING'"
+          name="ireply"
+        ></textarea>
+      </div>
+    </div>
+    <div class="buttons w-full h-[30%] flex flex-col">
+      <div class="w-full h-2/3 flex items-end justify-evenly">
+        <button
+          class="w-1/5 h-[45%] bg-black text-[#98ffbfd1] rps-btn"
+          (click)="updateInquiry()"
+        >
+          UPDATE
+        </button>
+        <button
+          class="w-1/5 h-[45%] bg-black text-[#98ffbfd1] rps-btn"
+          mat-dialog-close
+        >
+          CANCEL
+        </button>
+      </div>
+      <div class="errors w-full h-1/3 flex items-center justify-evenly">
+        <p class="text-[rgb(255,0,0)]">{{ error }}</p>
+      </div>
+    </div>
+  </form>
+</div>

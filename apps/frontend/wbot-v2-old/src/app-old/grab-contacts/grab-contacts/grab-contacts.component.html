@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="headerTab width flex">
+    <button
+      class="headerBtn"
+      [routerLink]="'/grab'"
+      routerLinkActive="activeLink"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Grab Group Contacts
+    </button>
+    <button
+      class="headerBtn"
+      [routerLink]="'/grab/c'"
+      routerLinkActive="activeLink"
+    >
+      Grab My Contacts
+    </button>
+  </div>
+  <button class="rps-mdl-button backBtn" [routerLink]="'/home'">
+    <i class="icon-arrow_back1"></i>
+  </button>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,49 @@
+{
+  "name": "wapi-script",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/scripts/wapi-script/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/scripts/wapi-script",
+        "format": ["cjs"],
+        "bundle": true,
+        "thirdParty": true,
+        "main": "apps/scripts/wapi-script/src/wapi.ts",
+        "additionalEntryPoints": ["apps/scripts/wapi-script/src/wapi_service.ts"],
+        "tsConfig": "apps/scripts/wapi-script/tsconfig.app.json",
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "development:watch": {
+          "outputPath": "apps/wbot-v2/src/assets/wapi/wapi.js"
+        },
+        "production": {
+          "minify": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": []
+}

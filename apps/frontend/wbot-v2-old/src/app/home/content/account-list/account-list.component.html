@@ -1,0 +1,125 @@
+<div class="container flex center">
+  @if (enableDefaultDisplay === true) {
+<div>
+    <table class="rightTable flex column">
+      <h4><b>Select an account:</b></h4>
+      <tr class="width flex align">
+        <td class="td1">
+          <div class="pretty p-icon p-round p-pulse">
+            <input type="radio" [(ngModel)]="data.c" value="new" />
+            <div class="state p-success">
+              <i class="icon mdi mdi-check"></i>
+              <label></label>
+            </div>
+          </div>
+        </td>
+        <td class="td2">
+          <label for="01">New Account</label>
+        </td>
+      </tr>
+      @if (!data.disableOpt.old) {
+<tr class="width flex align">
+        <td class="td1">
+          <div class="pretty p-icon p-round p-pulse">
+            <input type="radio" [(ngModel)]="data.c" value="old" />
+            <div class="state p-success">
+              <i class="icon mdi mdi-check"></i>
+              <label></label>
+            </div>
+          </div>
+        </td>
+        <td class="td2">
+          <label for="02">Existing Account</label>
+        </td>
+      </tr>
+}
+      @if (!data.disableOpt.unsaved) {
+<tr class="width flex align">
+        <td class="td1">
+          <div class="pretty p-icon p-round p-pulse">
+            <input type="radio" [(ngModel)]="data.c" value="unsaved" />
+            <div class="state p-success">
+              <i class="icon mdi mdi-check"></i>
+              <label></label>
+            </div>
+          </div>
+        </td>
+        <td class="td2">
+          <label for="03">Default Login</label>
+        </td>
+      </tr>
+}
+    </table>
+    <div class="btn flex center">
+      @if (data.c !== 'old') {
+<button
+        class="rps-mdl-button saveBtn"
+       
+        [mat-dialog-close]="data"
+      >
+        USE
+      </button>
+}
+      @if (data.c === 'old') {
+<button
+        class="rps-mdl-button saveBtn"
+       
+        (click)="fetchOptions()"
+      >
+        USE
+      </button>
+}
+      <button
+        class="rps-mdl-button saveBtn"
+        mat-dialog-close
+        style="margin-left: 7%"
+      >
+        CANCEL
+      </button>
+    </div>
+  </div>
+}
+  @if (enableDefaultDisplay === false) {
+<div>
+    <table class="rightTable flex column">
+      <h4><b>Select an account:</b></h4>
+      <tbody style="overflow-y: scroll; overflow-x: hidden">
+        @for (ops of opts; track ops) {
+<tr class="width flex align">
+          <td class="td1">
+            <div class="pretty p-icon p-round p-pulse">
+              <input
+                type="radio"
+                [(ngModel)]="data.accChoice"
+                value="{{ ops }}"
+              />
+              <div class="state p-success">
+                <i class="icon mdi mdi-check"></i>
+                <label></label>
+              </div>
+            </div>
+          </td>
+          <td class="td2 oplist">
+            <label for="01" matTooltip="{{ ops }}" matTooltipPosition="right">{{
+              ops
+            }}</label>
+          </td>
+        </tr>
+}
+      </tbody>
+    </table>
+    <div class="btn flex center width">
+      <button class="rps-mdl-button saveBtn" [mat-dialog-close]="data">
+        USE
+      </button>
+      <button
+        class="rps-mdl-button saveBtn"
+        mat-dialog-close
+        style="margin-left: 7%"
+      >
+        CANCEL
+      </button>
+    </div>
+  </div>
+}
+</div>

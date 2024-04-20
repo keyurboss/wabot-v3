@@ -1,0 +1,120 @@
+@if (uset | async; as u) {
+<div class="container flex">
+  <div class="container_content flex align column width">
+    <div class="container_content_header">
+      <h1>Software Settings</h1>
+    </div>
+    <hr />
+    <div class="container_content_delay flex align width">
+      <h1>Individual Chat Delay</h1>
+      <mat-slider
+        discrete
+        [displayWith]="formatLabel"
+        tickInterval="1"
+        [step]="0.5"
+        [min]="1"
+        [max]="10"
+        aria-label="units"
+      >
+        <input matSliderThumb [(ngModel)]="u.individual_interval" />
+      </mat-slider>
+      <h1>{{ u.individual_interval }} sec</h1>
+      <!-- <button
+        class="rps-mdl-button svbtn"
+        (click)="indSet(u.individual_interval)"
+      >
+        Save
+      </button> -->
+    </div>
+    <hr />
+    <div class="container_content_interval width">
+      <!-- [ngClass]="{'disabledcheckbox': !u.batch_interval.is_active}" -->
+      <div class="head flex justify align width">
+        <input type="checkbox" [(ngModel)]="u.batch_interval.is_active" />
+        <h3 [ngClass]="{ disableText: !u.batch_interval.is_active }">
+          Batch Interval
+        </h3>
+      </div>
+      <div class="container_content_delay flex align justify">
+        <h1 [ngClass]="{ disableText: !u.batch_interval.is_active }">
+          After Number OF Chat
+        </h1>
+        <mat-slider
+          [disabled]="u.batch_interval.is_active === false"
+          [displayWith]="chatinterval"
+          showTickMarks
+          discrete
+          [step]="5"
+          [min]="5"
+          [max]="55"
+          aria-label="units"
+        >
+          <input matSliderThumb [(ngModel)]="u.batch_interval.batch_count" />
+        </mat-slider>
+        <h1 [ngClass]="{ disableText: !u.batch_interval.is_active }">
+          {{ u.batch_interval.batch_count }} chat
+        </h1>
+      </div>
+      <div class="container_content_delay flex align justify">
+        <h1 [ngClass]="{ disableText: !u.batch_interval.is_active }">
+          Batch Chat Delay
+        </h1>
+        <mat-slider
+          [displayWith]="chatinterval"
+          [disabled]="u.batch_interval.is_active === false"
+          [step]="2"
+          [min]="2"
+          [max]="100"
+          showTickMarks
+          discrete
+          aria-label="units"
+        >
+          <input [(ngModel)]="u.batch_interval.batch_interval" matSliderThumb />
+        </mat-slider>
+        <h1 [ngClass]="{ disableText: !u.batch_interval.is_active }">
+          {{ u.batch_interval.batch_interval }} sec
+        </h1>
+      </div>
+      <!-- <button
+        class="rps-mdl-button btn"
+        [disabled]="u.batch_interval.is_active === false"
+        (click)="saveSettings(u)"
+      >
+        Save
+      </button> -->
+    </div>
+    <hr />
+    <div class="container_content_footer flex column align width">
+      <div class="otherSet flex width">
+        <div class="left flex column">
+          <div class="footer-check flex align">
+            <input type="checkbox" [(ngModel)]="u.ignoreForwardStrategy" />
+            <h3>Ignore Forward Strategy</h3>
+          </div>
+          <div class="footer-check flex align">
+            <input type="checkbox" [(ngModel)]="u.autoLogout" />
+            <h3>Auto Logout Whatsappweb</h3>
+          </div>
+        </div>
+        <div class="right flex column">
+          <div class="footer-check flex align">
+            <input type="checkbox" [(ngModel)]="u.isContentRTL" />
+            <h3>Set Content RTL</h3>
+          </div>
+          <div class="footer-check flex align">
+            <input type="checkbox" [(ngModel)]="u.reportWithOrignalData" />
+            <h3>Reports With Orignal Data</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="rps-mdl-button btn"
+      (click)="saveSettings(u)"
+      mat-dialog-close
+    >
+      Close
+    </button>
+  </div>
+</div>
+}

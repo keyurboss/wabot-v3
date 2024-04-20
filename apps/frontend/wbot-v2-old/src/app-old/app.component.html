@@ -1,0 +1,15 @@
+<div class="main-body">
+  <app-header [class.hide]="_HeadeObse | async"></app-header>
+
+  <div id="contentbody" class="main-container">
+    <img class="main-image" src="/assets/img/background.jpg" />
+    <div class="router_div" style="z-index: 2">
+      <router-outlet class="router"></router-outlet>
+    </div>
+  </div>
+</div>
+<!-- <router-outlet></router-outlet> -->
+<div class="loader_div" [class.hide]="_LoaderObse | async">
+  <!-- <div class="loader">Loading...</div> -->
+  <span class="loader"></span>
+</div>

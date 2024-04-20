@@ -1,0 +1,133 @@
+<div
+  [ngClass]="
+    isFetchContacts ? 'contactContainer' : 'contactFetchContainer flex justify'
+  "
+>
+  @if (!isFetchContacts) {
+<button
+    class="rps-mdl-button fetchBtn"
+   
+    (click)="fetchCon()"
+  >
+    Fetch Contacts
+  </button>
+}
+  @if (
+      isFetchContacts && myContacts | filter: filteredString:selectedOption; as filterdContact
+    ) {
+<div
+    class="content"
+   
+  >
+    <div class="partOne width flex justify">
+      <div class="labelPart">Total Contacts: {{ conLen }}</div>
+      <div class="btnPart">
+        <button
+          class="rps-mdl-button line-height"
+          [matMenuTriggerFor]="saveMenu"
+        >
+          Save
+        </button>
+        <button class="rps-mdl-button line-height" (click)="clearContacts()">
+          Clear
+        </button>
+      </div>
+    </div>
+    <div class="partTwo width flex align">
+      <div class="ptLeft flex align">
+        <div class="searchPart">
+          <label class="searchLabel">Search </label>
+          <input type="search" class="searchBar" [(ngModel)]="filteredString" />
+        </div>
+        <select
+          class="srchDrop"
+          id="srchDrop"
+          (change)="onSlct($any($event.target).value)"
+        >
+          <option selected value="startswith">Starts with</option>
+          <option value="endswith">End with</option>
+          <option value="regexPipe">Regex</option>
+        </select>
+      </div>
+      <div class="ptMid flex center">
+        <label class="replaceLabel">Replace </label>
+        <input type="text" class="replaceBar" [(ngModel)]="replaceString" />
+      </div>
+      <div class="ptRight flex center">
+        Filtered Contacts: {{ filterdContact.length }}
+      </div>
+    </div>
+    <div class="partThree width flex center">
+      <div class="table-wrapper">
+        <cdk-virtual-scroll-viewport
+          #virtualScrollRef
+          class="cvScroll height"
+          itemSize="30"
+        >
+          <table class="width">
+            <thead [style.top]="offset + 'px'">
+              <th>
+                <div class="pretty p-icon p-round p-pulse">
+                  <input
+                    type="checkbox"
+                    [ngModel]="allSelected"
+                    (click)="selectAllClick()"
+                  />
+                  <div class="state p-success">
+                    <i class="icon mdi mdi-check"></i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              @for (t of titles; track t) {
+<th>{{ t }}</th>
+}
+            </thead>
+            <tbody>
+              <tr *cdkVirtualFor="let contact of filterdContact">
+                <td>
+                  <div class="pretty p-icon p-round p-pulse">
+                    <input type="checkbox" [(ngModel)]="contact.selected" />
+                    <div class="state p-success">
+                      <i class="icon mdi mdi-check"></i>
+                      <label></label>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ contact.contact }}</td>
+                <td>{{ contact.name }}</td>
+                <td>
+                  @if (!contact.blacklisted) {
+<button
+                    class="blacklistBtn"
+                    (click)="onBlacklistClick(contact.id)"
+                    matTooltip="Add to Blacklist"
+                   
+                  >
+                    <i class="icon-add1"></i>
+                  </button>
+}
+                  @if (contact.blacklisted) {
+<button
+                    class="blacklistBtn"
+                    (click)="onBlacklistClick(contact.id)"
+                    matTooltip="Remove from Blacklist"
+                   
+                  >
+                    <i class="icon-delete1"></i>
+                  </button>
+}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+    <mat-menu #saveMenu="matMenu">
+      <button mat-menu-item (click)="saveTo('file')">Save To File</button>
+      <button mat-menu-item (click)="saveTo('table')">Add to Table</button>
+    </mat-menu>
+  </div>
+}
+</div>

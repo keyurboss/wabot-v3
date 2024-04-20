@@ -1,0 +1,25 @@
+.main,
+.logbtn {
+  background-image: linear-gradient(120deg, #2980b9, #8e44ad);
+}
+input {
+  outline: none;
+}
+.pulse:hover,
+.pulse:focus {
+  -webkit-animation: pulse 1s;
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}

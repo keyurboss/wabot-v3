@@ -1,0 +1,119 @@
+.container {
+  width: 386px;
+  background-color: white;
+  border-radius: 5px;
+  &_content {
+    width: 91%;
+    height: 98%;
+    &_header {
+      margin-bottom: 7%;
+      h1 {
+        margin: 2% 0 0 0;
+        font-size: 17px;
+      }
+    }
+    &_end {
+      margin-bottom: 6%;
+      .first {
+        box-sizing: border-box;
+        border: 1px solid;
+        h1 {
+          margin: 0;
+          font-size: 15px;
+        }
+        h2 {
+          margin: 0 0 3% 0;
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+      .second {
+        border: 1px solid black;
+        height: 206px;
+        .heading {
+          box-sizing: border-box;
+          background-color: black;
+          height: 35px;
+          justify-content: space-around;
+
+          h1 {
+            font-size: 14px;
+            color: #98ffbfd1;
+            margin: 0;
+            font-weight: 500;
+          }
+        }
+        .info {
+          height: 161px;
+          overflow: auto;
+          .number {
+            padding: 2% 0;
+            align-items: baseline;
+            justify-content: space-around;
+            .nm {
+              width: 120px;
+              font-size: 17px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              display: inline-block;
+            }
+            .delete {
+              width: 20%;
+              border-radius: 5px;
+              padding: 2% 2px;
+              background-color: red;
+              margin-left: 6%;
+              border: none;
+              cursor: pointer;
+              i {
+                font-size: 22px;
+                color: white;
+              }
+              &:hover {
+                background-color: rgba(255, 0, 0, 0.61);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &_footer {
+      margin-bottom: 6%;
+      .btn-end {
+        width: 28%;
+        padding: 2% 18%;
+        border-radius: 3px;
+        i {
+          font-size: 23px;
+          margin-right: 2%;
+          font-weight: 500;
+        }
+        h6 {
+          font-weight: 500;
+          margin: 0 0 0 0;
+          font-size: 18px;
+          margin-left: 2%;
+        }
+      }
+    }
+  }
+}
+.btn-middle {
+  margin-right: 10%;
+  width: 23%;
+  background-color: #01b55b;
+  border: 1px solid black;
+  cursor: pointer;
+  height: 45px;
+  border-radius: 5px;
+  i {
+    font-size: 26px;
+    color: white;
+    font-weight: bold;
+  }
+  &:hover {
+    background-color: #19e47e;
+  }
+}

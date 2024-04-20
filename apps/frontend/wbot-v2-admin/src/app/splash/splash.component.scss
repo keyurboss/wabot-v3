@@ -1,0 +1,67 @@
+:host {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  // z-index: 5;
+  // top: 0;
+  // left: 0;
+}
+.splash_container {
+  height: 100%;
+  width: 100%;
+  // z-index: 5;
+  background: #f0f8ff;
+  .image {
+    height: 50vh;
+    animation: bounce 2s linear 1s infinite;
+    img {
+      height: 100%;
+    }
+  }
+  .software_name {
+    font: 40px 'Operator Mono';
+    h1 {
+      // &::after{
+      // content: "By R P Softech";
+      // margin-top: 12vh;
+      // position: absolute;
+      // color: black;
+      // font-size: 1.5rem;
+      // }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  &.center {
+    align-items: center;
+    justify-content: center;
+  }
+  &.column {
+    flex-direction: column;
+  }
+}
+.color {
+  &_rps_s {
+    color: var(--rps-logo-second);
+  }
+  &_rps_p {
+    color: var(--rps-logo-primary);
+  }
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}

@@ -1,0 +1,40 @@
+.container {
+  flex-flow: column nowrap;
+  width: 250px;
+  .rightTable {
+    width: 250px;
+    height: 200px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: white;
+    box-sizing: border-box;
+    color: darkslategrey;
+    tr {
+      height: 50px;
+      .td1 {
+        margin-left: 20%;
+      }
+      .td2 {
+        margin-left: 10%;
+      }
+      .oplist {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    td {
+      text-align: center;
+    }
+  }
+  .btn {
+    height: 72px;
+    margin-top: 2%;
+    .saveBtn {
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 2%;
+      width: 30%;
+    }
+  }
+}

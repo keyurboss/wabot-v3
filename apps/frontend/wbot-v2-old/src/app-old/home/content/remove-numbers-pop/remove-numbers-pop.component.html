@@ -1,0 +1,19 @@
+<h2>Remove Numbers From Table</h2>
+<div class="contain tw-flex tw-flex-col">
+  <div class="tw-flex tw-items-center tw-justify-center">
+    <span class="tw-w-12 tw-text-lg">From: </span>
+    <input [(ngModel)]="From" class="input_style tw-w-36" type="number" />
+  </div>
+  <div class="tw-flex tw-items-center tw-justify-center">
+    <span class="tw-w-12 tw-text-lg">To: </span>
+    <input [(ngModel)]="To" class="input_style tw-w-36" type="number" />
+  </div>
+  <button
+    mat-button
+    class="no-drag rps-mdl-button padding-4"
+    [disabled]="!From || !To"
+    (click)="RemoveNumbers()"
+  >
+    Remove Numbers
+  </button>
+</div>

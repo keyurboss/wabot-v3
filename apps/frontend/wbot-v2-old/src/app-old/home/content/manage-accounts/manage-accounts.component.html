@@ -1,0 +1,66 @@
+<div class="container flex center">
+  @if (existingAccounts | async; as n) {
+<div class="container_content">
+    <div class="container_content_header">
+      <h1><b>Manage Accounts</b></h1>
+    </div>
+    @if (n.length > 0) {
+<div>
+      <div class="container_content_end width">
+        <table class="second flex column">
+          <thead class="heading flex width">
+            <th>
+              <h1>Name</h1>
+            </th>
+            <th>
+              <h1>Remove</h1>
+            </th>
+          </thead>
+          <tbody class="info">
+            @for (number of n; track number) {
+<tr class="number flex width">
+              <td
+                class="nm flex justify"
+                matTooltip="{{ number }}"
+                matTooltipPosition="below"
+                matTooltipShowDelay="1000"
+              >
+                {{ number }}
+              </td>
+              <td
+                class="delete flex center"
+                matTooltip="Delete"
+                matTooltipPosition="right"
+                matTooltipShowDelay="500"
+                (click)="delete(number)"
+              >
+                <i class="icon-delete"></i>
+              </td>
+            </tr>
+}
+          </tbody>
+        </table>
+      </div>
+    </div>
+}
+    @if (n.length === 0) {
+<div class="flex center" style="height: 300px">
+      <button class="btn-middle" (click)="add()" style="margin: unset">
+        <i class="icon-add1"></i>
+      </button>
+    </div>
+}
+    <div class="container_content_footer flex justify width">
+      @if (n.length > 0) {
+<button class="btn-middle" (click)="add()">
+        <i class="icon-add1"></i>
+      </button>
+}
+      <button class="btn-end flex rps-mdl-button center" mat-dialog-close>
+        <i class="icon-close"></i>
+        <h6>Cancel</h6>
+      </button>
+    </div>
+  </div>
+}
+</div>

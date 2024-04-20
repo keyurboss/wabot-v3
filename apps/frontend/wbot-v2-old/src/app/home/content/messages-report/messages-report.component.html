@@ -1,0 +1,51 @@
+<div class="main flex center column">
+  <div class="title flex center">
+    <h1><b>MESSAGE STATUS REPORT</b></h1>
+    <!-- <input class="w-0 h-0" hidden autofocus/> -->
+  </div>
+  <div class="content flex center column width">
+    <h4>Total Messages Sent:{{ totalSentMsg }}</h4>
+    <h4>Success Number Count:{{ successCount }}</h4>
+    <h4>Failed Number Count:{{ failedCount }}</h4>
+    <div class="startStopButtons flex center">
+      <button
+        class="rps-mdl-button startStop"
+        (click)="toggleStartStop()"
+        [disabled]="
+          canStopSubjectValue === true || data.finishStatus.value === true
+        "
+      >
+        Start Sending
+      </button>
+      <button
+        class="rps-mdl-button startStop"
+        (click)="toggleStartStop()"
+        [disabled]="
+          canStopSubjectValue === false || data.finishStatus.value === true
+        "
+      >
+        Stop Sending
+      </button>
+    </div>
+    <button
+      class="rps-mdl-button"
+      [disabled]="
+        !(data.finishStatus.value === true || canStopSubjectValue === false)
+      "
+      (click)="closeDialog()"
+    >
+      Close
+    </button>
+    <button class="rps-mdl-button" [matMenuTriggerFor]="reportOptions">
+      Report
+    </button>
+  </div>
+</div>
+
+<mat-menu #reportOptions="matMenu">
+  <button mat-menu-item (click)="generateReportClick('all')">All</button>
+  <button mat-menu-item (click)="generateReportClick('success')">
+    Success
+  </button>
+  <button mat-menu-item (click)="generateReportClick('failed')">Failed</button>
+</mat-menu>

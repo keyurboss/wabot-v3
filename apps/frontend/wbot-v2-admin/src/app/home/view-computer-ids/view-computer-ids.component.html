@@ -1,0 +1,147 @@
+@if (dataObs | async | filter: searchString; as dataP) {
+<div
+  class="w-full h-full border-[3px] border-solid box-border flex items-center justify-center flex-col"
+ 
+>
+  <div class="w-full h-[10%] flex items-center justify-center">
+    <h2 class="text-[25px]"><b>COMPUTER IDS</b></h2>
+  </div>
+  <div class="w-full h-[5%] flex items-center justify-between pl-[1%] mb-[1%]">
+    <div
+      class="flex items-center justify-center w-[32%] h-full bg-[#ddd8d8] border rounded-[40px] ml-[1%] hover:border hover:border-solid hover:border-black active:border active:border-solid active:border-black"
+    >
+      <!-- <i class="icon-search"></i> -->
+      <img class="w-[8%] h-full" src="../../../assets/search-sharp.svg" />
+      <input
+        type="search"
+        class="w-[84%] h-[90%] border-none ml-[1%] rounded-r-[40px] rounded-l-[10px] outline-none bg-[#ddd8d8]"
+        [(ngModel)]="searchString"
+        placeholder="Search"
+      />
+    </div>
+    <div class="w-[20%] h-full text-center">
+      <p>
+        <b>Total CIDs: {{ dataObs.value.length }}</b>
+      </p>
+    </div>
+  </div>
+  <div class="w-full h-[60%] overflow-y-scroll">
+    <table class="w-full h-full border-collapse box-border">
+      <thead
+        class="flex w-full items-center box-border h-[35px] bg-[#01987a] sticky z-10 top-0 border-b border-solid border-[#01987a]"
+      >
+        <th class="w-[5%] text-center">
+          <i class="icon-delete1 text-red-500" hidden></i>
+        </th>
+        <th class="w-[5%] text-center">Edit</th>
+        <th class="w-[15%] text-left">Name</th>
+        <th class="w-[15%] text-left">Number</th>
+        <th class="w-[25%] text-left">User ID</th>
+        <th class="w-[25%] text-left">Computer ID</th>
+        <th class="w-[10%] text-left">Created On</th>
+      </thead>
+      <tbody class="flex flex-col w-full bg-[rgb(185, 181, 181)]">
+        @for (d of dataP; track d) {
+<tr
+          class="tabRow flex items-center h-[35px] border-b border-solid border-[#01987a] hover:bg-[#01987a] active:bg-[#01987a] focus:bg-[#01987a]"
+         
+        >
+          <td class="w-[5%] flex justify-center">
+            <i
+              class="icon-delete1 text-red-500 cursor-pointer"
+              (click)="deleteComputerId(d.cid || '')"
+            ></i>
+          </td>
+          <td class="w-[5%] flex justify-center">
+            <i
+              class="icon-edit cursor-pointer hover:text-white focus:text-white active:text-white"
+              (click)="editClick(d.cid || '', d.uid)"
+            ></i>
+          </td>
+          <td class="w-[15%] text-left">
+            <p
+              class="w-[85%] whitespace-nowrap overflow-hidden text-ellipsis"
+              matTooltip="{{ d.name }}"
+              matTooltipShowDelay="1000"
+            >
+              {{ d.name }}
+            </p>
+          </td>
+          <td class="w-[15%] text-left">
+            <p
+              class="w-[85%] whitespace-nowrap overflow-hidden text-ellipsis"
+              matTooltip="{{ d.number }}"
+              matTooltipShowDelay="1000"
+            >
+              {{ d.number }}
+            </p>
+          </td>
+          <td class="w-[25%] text-left flex justify-start pr-[2%]">
+            <p class="w-[91%] whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.uid }}
+            </p>
+            <button
+              class="w-[9%] bg-[#ddd8d8] text-[12px] rounded-full hover:bg-black hover:text-white"
+              [cdkCopyToClipboard]="d.uid"
+              (click)="openSnackBar()"
+            >
+              <i class="icon-content_copy"></i>
+            </button>
+          </td>
+          <td class="w-[25%] text-left flex justify-between pr-[3%]">
+            <p class="w-[90%] whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ d.cid }}
+            </p>
+            <button
+              class="w-[9%] bg-[#ddd8d8] text-[12px] rounded-full hover:bg-black hover:text-white"
+              [cdkCopyToClipboard]="d.cid || ''"
+              (click)="openSnackBar()"
+            >
+              <i class="icon-content_copy"></i>
+            </button>
+          </td>
+          <td class="w-[15%] text-left">
+            {{ d.created_at | date: 'dd/MM/yyyy' }}
+          </td>
+        </tr>
+}
+      </tbody>
+    </table>
+  </div>
+  <div class="w-full h-[10%]" [hidden]="enableEditSection === false">
+    <form class="w-full h-full flex items-center justify-evenly">
+      <label>Old:</label>
+      <input
+        class="w-[30%] h-3/5 border border-solid border-black disabled:!bg-[#e0e0e0] disabled:!cursor-not-allowed"
+        placeholder="old user id"
+        [(ngModel)]="oldUserID"
+        name="ou"
+        disabled=""
+      />
+      <label>New:</label>
+      <input
+        class="w-[30%] h-3/5 border border-solid border-black pl-[1%]"
+        style="outline: none"
+        placeholder="Enter new userid"
+        [(ngModel)]="newUserID"
+        name="nu"
+      />
+      <input
+        class="w-[10%] h-3/5 rps-btn"
+        type="submit"
+        value="UPDATE"
+        (click)="update()"
+      />
+      <input
+        class="w-[10%] h-3/5 rps-btn"
+        type="button"
+        value="CANCEL"
+        (click)="cancel()"
+      />
+    </form>
+  </div>
+  <div class="w-full h-[15%] flex items-center justify-evenly">
+    <button class="w-1/6 h-2/5 rps-btn" (click)="closeDialog()">CLOSE</button>
+  </div>
+</div>
+}

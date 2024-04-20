@@ -1,0 +1,43 @@
+<div class="div-container">
+  <div style="display: contents" [hidden]="hideForm">
+    <h1>Sign Up Request Form:</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Name.</mat-label>
+      <input type="text" matInput [(ngModel)]="name" placeholder="John Doe" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mobile No.</mat-label>
+      <input
+        type="text"
+        matInput
+        #number
+        maxlength="10"
+        [(ngModel)]="monumber"
+        placeholder="8811881188"
+      />
+      <mat-hint align="end">{{ number.value.length }} / 10</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ref No.</mat-label>
+      <input
+        matInput
+        #refs
+        maxlength="5"
+        [(ngModel)]="ref"
+        placeholder="Ex. KEYU1"
+      />
+      <mat-hint align="end">{{ refs.value.length }} / 5</mat-hint>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      matRipple
+      (click)="submit()"
+      class="rps-mdl-button mdl-js-button rps-mdl-button--raised mdl-js-ripple-effect header-button"
+    >
+      <span>Submit</span>
+    </button>
+  </div>
+  <div [hidden]="!hideForm">
+    <h1>Please Ask Admin For More Help</h1>
+  </div>
+</div>

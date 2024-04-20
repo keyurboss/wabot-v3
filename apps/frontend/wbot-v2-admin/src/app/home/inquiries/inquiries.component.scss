@@ -1,0 +1,39 @@
+.tabRow:hover .tabInp {
+  background-color: #01987a;
+
+  &:focus {
+    background-color: #fff;
+  }
+}
+.table_grid {
+  &.grid {
+    display: grid;
+    max-width: 1280px;
+  }
+  &.grid_template {
+    grid-template-columns: 5% 15% 10% 15% 10% 10% 15% 15% 5%;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 10px;
+    h2 {
+      font-size: 14px !important;
+    }
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  * {
+    font-size: 10px;
+    h2 {
+      font-size: 16px !important;
+    }
+    input[type='button'],
+    input[type='submit'] {
+      font-size: 6px;
+    }
+  }
+}

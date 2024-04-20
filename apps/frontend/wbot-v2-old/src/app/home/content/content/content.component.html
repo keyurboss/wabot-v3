@@ -1,0 +1,427 @@
+@if (contentServ.UserTypeObserv | async; as utype) {
+  <div class="content_container width height flex">
+    <div class="part1 width height flex column">
+      <div class="function_buttons flex">
+        <div class="menu_button_divs">
+          <button
+            [matMenuTriggerFor]="importMenu"
+            class="rps-mdl-button line-height header-button"
+          >
+            <span>Import Number</span>
+          </button>
+        </div>
+        <div class="menu_button_divs">
+          <button
+            (click)="expoerCsv()"
+            class="rps-mdl-button line-height header-button"
+            [disabled]="utype === 'free'"
+          >
+            <span>Export Data</span>
+          </button>
+        </div>
+        <div class="menu_button_divs">
+          <button
+            (click)="clearTable()"
+            class="rps-mdl-button line-height header-button"
+          >
+            <span>Clear</span>
+          </button>
+        </div>
+        <div class="menu_button_divs">
+          <button
+            [matMenuTriggerFor]="filtterMenu"
+            class="rps-mdl-button line-height header-button"
+          >
+            <span>Filter</span>
+          </button>
+        </div>
+      </div>
+      @if (tdata | async; as t) {
+        <div>
+          <div class="part1_container" [class.hide]="t.length === 0">
+            <div class="part1_container_infos flex width align">
+              <div class="left">
+                <h1>Total {{ t.length }} Rows</h1>
+              </div>
+              <div class="right flex new_search width">
+                <div class="search-box flex align">
+                  <input
+                    [class.isDirty]="MainTablesearchText !== ''"
+                    class="search-txt"
+                    type="text"
+                    [(ngModel)]="MainTablesearchText"
+                    placeholder="Type to Search"
+                  />
+                  <a class="search-btn flex center">
+                    <i class="icon-search"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <table class="table">
+              <cdk-virtual-scroll-viewport
+                #VirtualScrollEle
+                class="tbody virtual-scroll-overflow"
+                itemSize="6"
+              >
+                <tr
+                  class="header template flex-center"
+                  [style.top]="offset + 'px'"
+                >
+                  @for (header of tableheader; track header) {
+                    <th class="flex-center">
+                      {{ header }}
+                    </th>
+                  }
+                </tr>
+                <tr
+                  class="display-grid template row"
+                  *cdkVirtualFor="
+                    let data of t
+                      | textSearchFromJsonArray: 'number' : MainTablesearchText;
+                    let i = index
+                  "
+                >
+                  <td class="icon">
+                    <i
+                      matTooltip="Remove Row"
+                      (click)="RemoveElementFromIndex(data.index || i)"
+                      class="icon-remove_circle_outline"
+                    ></i>
+                  </td>
+                  <td>{{ (data.index || i) + 1 }}</td>
+                  @for (col of contentServ.tableKeys; track col) {
+                    <td>
+                      {{ data[col] }}
+                    </td>
+                  }
+                </tr>
+              </cdk-virtual-scroll-viewport>
+            </table>
+          </div>
+          <div class="part1-image width" [class.hide]="t.length !== 0">
+            <div class="part1-image_default flex center column width height">
+              <img class="img" src="/assets/svgs/csv-svgrepo-com.svg" />
+              <h3>Nothing to Display</h3>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="part2 flex column">
+      <div class="part2_container width">
+        <div class="part2_container_header flex width">
+          <div
+            class="part2_container_header_left flex"
+            cdkDropList
+            cdkDropListOrientation="horizontal"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (
+              t of this.contentServ.data.tabsData();
+              track t;
+              let i = $index
+            ) {
+              <div
+                class="flex msg width align"
+                cdkDrag
+                cdkDragPreviewClass="myCdkPreview"
+                cdkDragLockAxis="x"
+                cdkDragBoundary=".part2_container_header_left"
+                [ngClass]="{
+                  tabactive: i === this.contentServ.activeTabIndex
+                }"
+                (click)="contentServ.setActiveTab(i)"
+              >
+                <div class="txtmsg flex align width height">
+                  <h1
+                    class="width"
+                    [ngStyle]="{
+                      'font-size':
+                        this.contentServ.data.tabsData().length === 5
+                          ? '13px'
+                          : '14px'
+                    }"
+                  >
+                    MSG {{ i + 1 }}
+                  </h1>
+                </div>
+                <img
+                  src="/assets/svgs/close-outline.svg"
+                  (click)="contentServ.closeTab(i)"
+                />
+              </div>
+            }
+          </div>
+          <div
+            class="part2_container_header_right flex center"
+            (click)="contentServ.addTabs()"
+          >
+            <img />
+          </div>
+        </div>
+        <div class="part2_container_txt-btn flex width">
+          <div class="plus flex center" [matMenuTriggerFor]="variables">
+            <i>
+              <mat-menu #variables="matMenu" xPosition="after">
+                @for (variables of vars; track variables) {
+                  <button mat-menu-item (click)="insertExtra(variables, m)">
+                    {{ variables }}
+                  </button>
+                }
+              </mat-menu>
+            </i>
+          </div>
+          @if (this.contentServ.data.tabsData(); as messages) {
+            @if (messages[this.contentServ.activeTabIndex].msg | urlChecker) {
+              <div class="check flex align">
+                <div class="checkbox width">
+                  <input
+                    type="checkbox"
+                    id="checkbox"
+                    [(ngModel)]="
+                      messages[this.contentServ.activeTabIndex].previewlink
+                    "
+                  />
+                  <label for="checkbox"><span>Link Preview</span></label>
+                </div>
+              </div>
+            }
+          }
+          <div class="right flex">
+            <div (click)="insertExtra('*', m)" class="img">
+              <i class="icon-format_bold1"></i>
+            </div>
+            <div (click)="insertExtra('_', m)" class="img">
+              <i class="icon-format_italic"></i>
+            </div>
+            <div class="img" (click)="insertExtra('~', m)">
+              <i class="icon-format_strikethrough"></i>
+            </div>
+          </div>
+        </div>
+<!--  -->
+        <div class="part2_container_txt-area width">
+          <textarea
+            #m
+            class="txt"
+            placeholder="Enter your Message here"
+            [(ngModel)]="
+              this.contentServ.data.tabsData()[this.contentServ.activeTabIndex]
+                .msg
+            "
+          ></textarea>
+        </div>
+        <div class="part2_container_footer flex column">
+          <div class="part2_container_footer_first">
+            <h1>Extras</h1>
+          </div>
+          <div class="part2_container_footer_second flex width">
+            <div class="buttons flex">
+              <button
+                class="rps-mdl-button same"
+                (click)="importExtra('images')"
+              >
+                Images
+              </button>
+              <button
+                class="rps-mdl-button same"
+                (click)="importExtra('music')"
+              >
+                Music
+              </button>
+              <button
+                [matMenuTriggerFor]="otherMenu"
+                class="rps-mdl-button othr same"
+              >
+                Others
+              </button>
+              <mat-menu #otherMenu="matMenu" xPosition="after">
+                <button mat-menu-item (click)="importExtra('videos')">
+                  Videos
+                </button>
+                <button mat-menu-item (click)="importExtra('documents')">
+                  Documents
+                </button>
+                <button mat-menu-item (click)="importExtra('pdf')">PDF</button>
+                <button mat-menu-item (click)="importExtra('ppt')">PPT</button>
+              </mat-menu>
+            </div>
+            <div class="last-btn flex">
+              <button class="rps-mdl-button clr" (click)="allclear()">
+                Clear
+              </button>
+            </div>
+          </div>
+          <div class="part2_container_footer_third">
+            @if (tabledata2().length !== 0) {
+              <table
+                class="part2_container_footer_third_table width"
+                cdkDropList
+                (cdkDropListDropped)="d($event)"
+              >
+                <tr class="part2_container_footer_third_table_raw static">
+                  <th></th>
+                  @for (header of tableheader2; track header) {
+                    <th>{{ header }}</th>
+                  }
+                </tr>
+                <tbody class="tbdy">
+                  @for (data of tabledata2(); track data; let j = $index) {
+                    <tr
+                      class="part2_container_footer_third_table_raw"
+                      cdkDragBoundary=".tbdy"
+                      cdkDragLockAxis="y"
+                      cdkDrag
+                    >
+                      <td class="handle">
+                        <i
+                          class="icon-more_vert1"
+                          style="font-size: 20px"
+                          cdkDragHandle
+                        ></i>
+                      </td>
+                      <td>
+                        <h2
+                          matTooltip="{{ data.name }}"
+                          matTooltipPosition="right"
+                          matTooltipShowDelay="1000"
+                        >
+                          {{ data.name }}
+                        </h2>
+                      </td>
+                      <td>{{ data.type }}</td>
+                      <td>
+                        @if (data.type === 'images') {
+                          <i class="icon-remove_red_eyevisibility icon">
+                            <img id="img" [src]="data.base64" />
+                          </i>
+                        }
+                      </td>
+                      <td class="icon">
+                        <i
+                          class="icon-remove_circle_outline icon rmvicon"
+                          matTooltip="Remove Row"
+                          (click)="RemoveMultimedia(j)"
+                        ></i>
+                      </td>
+                      <td [hidden]="utype === 'free'">
+                        @if (data.type === 'images') {
+                          <i
+                            class="icon-edit tw-cursor-pointer"
+                            matTooltip="Add Description"
+                            (click)="contentServ.addDescription(data.base64)"
+                          ></i>
+                        }
+                      </td>
+                    </tr>
+                  }
+                  <div
+                    class="example-custom-placeholder"
+                    *cdkDragPlaceholder
+                  ></div>
+                </tbody>
+              </table>
+            }
+            @if (tabledata2().length === 0) {
+              <div class="part1-image width height">
+                <div
+                  class="part1-image_default flex center column width height"
+                >
+                  <img
+                    class="img-msg"
+                    src="../../../../assets/svgs/email-message-svgrepo-com.svg"
+                  />
+                  <h3>Nothing to Display</h3>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="part3 flex align column">
+      <button
+        class="btn-setting mdl-button rps-mdl-button flex-center"
+        [matMenuTriggerFor]="Settings"
+      >
+        <i class="icon-settings1"></i>
+      </button>
+      <button
+        class="mdl-button rps-mdl-button header-button flex-center tw-flex-col side-buttons"
+        (click)="openStartSending()"
+        [disabled]="
+          this.utype !== 'premium' &&
+          this.contentServ.maxContactSendLength === 0
+        "
+      >
+        <span> Start </span>
+        <span> Sending </span>
+      </button>
+      <button
+        class="mdl-button rps-mdl-button header-button flex-center tw-flex-col side-buttons btn-mng"
+        [disabled]="utype === 'free'"
+        (click)="openManageAccounts()"
+      >
+        <span> Manage </span>
+        <span> Accounts </span>
+      </button>
+      <div class="flex center">
+        <button
+          class="mdl-button rps-mdl-button btn-mar flex-center"
+          (click)="openWhatsappWindow()"
+        >
+          <img src="/assets/svgs/whatsapp-button.svg" alt="" />
+          @if (isWhatsappActive | async; as u) {
+            <span
+              class="cls"
+              matTooltip="Close"
+              [class.hide]="u.active === false"
+              (click)="CloseWhatsappWebWindows($event)"
+            >
+              <i class="icon-clearclose"></i>
+            </span>
+          }
+        </button>
+      </div>
+      <button
+        [disabled]="utype !== 'premium'"
+        (click)="openGrabComponent()"
+        class="mdl-button rps-mdl-button header-button flex-center tw-flex-col side-buttons btn-grb"
+      >
+        <span> Grab </span>
+        <span> Contacts </span>
+      </button>
+    </div>
+    <mat-menu #menu="matMenu" [hidden]="!(contentServ.tableKeys.length > 0)">
+      @for (key of contentServ.tableKeys; track key) {
+        <button mat-menu-item [hidden]="key === 'number'">
+          <!-- (click)="insertExtra(key)" -->
+          {{ key }}
+        </button>
+      }
+    </mat-menu>
+    <mat-menu #importMenu="matMenu">
+      <button mat-menu-item (click)="importCsvElectron()">From File</button>
+      <button mat-menu-item (click)="importNumberMenually()">
+        Import Manually
+      </button>
+    </mat-menu>
+    <mat-menu #filtterMenu="matMenu">
+      <button mat-menu-item (click)="removeDuplicates()">
+        Remove Duplicates
+      </button>
+      <button mat-menu-item (click)="filtterBlacklist()">
+        Filter Blacklist
+      </button>
+      <button mat-menu-item (click)="AddCountryCode()">Add Country Code</button>
+      <button mat-menu-item (click)="RemoveNumbersPopup()">
+        Remove Table Numbers
+      </button>
+    </mat-menu>
+    <mat-menu #Settings="matMenu">
+      <button mat-menu-item (click)="OpenSettings()">Software Settings</button>
+      <button mat-menu-item (click)="OpenBlackList()">Black-List</button>
+    </mat-menu>
+  </div>
+}

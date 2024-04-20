@@ -1,0 +1,28 @@
+<div
+  class="w-full h-full border-[3px] border-solid box-border flex items-center justify-center flex-col"
+>
+  <div class="w-full h-[15%] flex items-center justify-center">
+    <h2 class="text-[25px]"><b>DECRYPT FILE</b></h2>
+  </div>
+  <div class="w-full h-[85%]">
+    <form class="w-full h-full flex items-center justify-start flex-col">
+      <div class="w-1/2 h-[30%] flex items-center justify-center">
+        <input
+          type="file"
+          class="flex items-center justify-center"
+          accept=".wbot"
+          #f
+          id="finp"
+        />
+      </div>
+      <div class="w-1/2 h-[30%] flex items-center justify-center">
+        <input
+          type="submit"
+          class="rps-btn text-[16px] p-[2%] cursor-pointer"
+          value="CONVERT"
+          (click)="convertFile()"
+        />
+      </div>
+    </form>
+  </div>
+</div>

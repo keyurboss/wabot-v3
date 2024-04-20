@@ -16,6 +16,9 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+install-state.gz
+.nx
+.yarn/cache
 
 # IDE - VSCode
 .vscode/*

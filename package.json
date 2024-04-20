@@ -2,12 +2,18 @@
   "name": "@wabot-v3/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@nx/angular": "^18.3.3",
     "@nx/js": "18.3.3",
+    "@nx/nest": "^18.3.3",
     "@nx/workspace": "18.3.3",
-    "nx": "18.3.3"
+    "nx": "18.3.3",
+    "prettier": "^3.2.5"
+  },
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "electron": "^30.0.1",
+    "xlsx": "^0.18.5"
   }
 }
