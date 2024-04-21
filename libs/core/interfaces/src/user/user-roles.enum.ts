@@ -1,0 +1,8 @@
+export enum UserRoles {
+  RATE_ADMIN = 'RATE_ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  ADMIN = 'ADMIN',
+  GENERAL_USER = 'GENERAL_USER',
+  TRADE_USER = 'TRADE_USER',
+  GOD = 'GOD',
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ServerGuards",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/servers/guards/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/servers/guards",
+        "tsConfig": "libs/servers/guards/tsconfig.lib.json",
+        "packageJson": "libs/servers/guards/package.json",
+        "main": "libs/servers/guards/src/index.ts",
+        "assets": ["libs/servers/guards/*.md"]
+      }
+    }
+  }
+}
