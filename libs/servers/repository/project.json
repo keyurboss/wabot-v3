@@ -1,0 +1,20 @@
+{
+  "name": "repository",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/servers/repository/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/servers/repository",
+        "tsConfig": "libs/servers/repository/tsconfig.lib.json",
+        "packageJson": "libs/servers/repository/package.json",
+        "main": "libs/servers/repository/src/index.ts",
+        "assets": ["libs/servers/repository/*.md"]
+      }
+    }
+  }
+}

@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@rps/wabot-interfaces": ["libs/core/interfaces/src/index.ts"],
+      "@rps/wabot-repos": ["libs/servers/repository/src/index.ts"],
+      "@rps/wabot-server-core": ["libs/servers/core/src/index.ts"],
       "@rps/wabot-validator-roots": ["libs/core/validator-roots/src/index.ts"]
     }
   },

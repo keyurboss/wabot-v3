@@ -1,0 +1,20 @@
+{
+  "name": "ServerCore",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/servers/core/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/servers/core",
+        "tsConfig": "libs/servers/core/tsconfig.lib.json",
+        "packageJson": "libs/servers/core/package.json",
+        "main": "libs/servers/core/src/index.ts",
+        "assets": ["libs/servers/core/*.md"]
+      }
+    }
+  }
+}
