@@ -5,6 +5,7 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build":{},
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",

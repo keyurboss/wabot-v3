@@ -26,7 +26,7 @@ export class UserMongoRepository
     private readonly fixtureService: FixtureMongoService,
     @Inject(GeneralUserSeedFileName)
     @Optional()
-    private readonly fileName = 'general-user.data.json',
+    private readonly fileName = 'user.data.json',
   ) {
     super();
     this.collection = db.collection<UserRoot>(generalUserCollection);
