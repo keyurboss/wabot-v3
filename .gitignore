@@ -19,6 +19,7 @@ node_modules
 install-state.gz
 .nx
 .yarn/cache
+.angular
 
 # IDE - VSCode
 .vscode/*
