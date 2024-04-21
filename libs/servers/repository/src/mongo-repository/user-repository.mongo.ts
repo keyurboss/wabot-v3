@@ -1,7 +1,8 @@
 import { Inject, OnModuleInit, Optional } from '@nestjs/common';
 import { UserId } from '@rps/wabot-interfaces';
+import { FixtureMongoService, LoggerFactory, MongoDbService } from '@rps/wabot-server-core';
 import { UserOptions, UserRoot } from '@rps/wabot-validator-roots';
-import { UserRepository } from '../interface';
+import { UserFilter, UserRepository } from '../interface';
 
 export const generalUserCollection = 'GeneralUser';
 export const GeneralUserSeedFileName = 'GeneralUserSeedFileName';
@@ -36,13 +37,13 @@ export class UserMongoRepository
     if (this.fixtureService !== null) {
       await this.fixtureService
         .seedFixtures(generalUserCollection, this.fileName)
-        .catch((e:never) => {
-          this.logger.error(e['message'], e);
+        .catch((e) => {
+          this.logger.error(e.message, e);
         });
     }
   }
 
-  async find(filter?: GeneralUserFilter): Promise<UserRoot[]> {
+  async find(filter?: UserFilter): Promise<UserRoot[]> {
     const cursor = filter
       ? this.collection.find(filter)
       : this.collection.find();

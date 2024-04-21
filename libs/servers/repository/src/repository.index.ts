@@ -7,7 +7,7 @@ import {
   UserMongoRepository
 } from './mongo-repository';
 
-export const GeneralUserRepoProvider: Provider = {
+export const UserRepoProvider: Provider = {
   provide: UserRepository,
   useClass: UserMongoRepository,
 };

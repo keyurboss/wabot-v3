@@ -1,5 +1,5 @@
 import { Filter } from 'mongodb';
-import { EntityNotFoundError } from '@rps/bullion-interfaces';
+import { EntityNotFoundError } from '@rps/wabot-interfaces';
 export abstract class CommonRepository<
   TFilter extends Filter<never>,
   TRoot extends object,

@@ -5,7 +5,7 @@
   "sourceRoot": "apps/frontend/wbot-v2-old/src",
   "prefix": "wbot-v2-nx",
   "targets": {
-    "build": {
+    "xbuild": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
